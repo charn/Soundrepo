@@ -14,8 +14,8 @@
 ***********************
 
 #!/usr/bin/ruby
-sounds = ["~/homer-simpson-mail-call-gather-around.wav",
-	"~/homer-simpson-mail-is-here.wav"]
+sounds = ["~/git-commit-sound-1.wav",
+	"~/git-commit-sound-2.wav"]
 chosen = sounds[rand(sounds.size)]
 %x[ play #{chosen} > /dev/null 2>&1 ]
 
@@ -45,4 +45,3 @@ git pull > /dev/null 2>&1
 # m h  dom mon dow   command
 * * * * * sleep 30; ~/update-soundrepo.sh
 * * * * * ~/update-soundrepo.sh
-

@@ -1,0 +1,5 @@
+#!/bin/sh
+# echo "POST MERGE"
+
+# Play sound if new stuff comes in
+~/git-sound-effect.rb
