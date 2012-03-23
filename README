@@ -1,0 +1,48 @@
+***************************************************
+* Playing a sound when a new commit has been made *
+***************************************************
+
+1. Get some sound files
+2. Set-up git-sound-effect.rb
+3. Clone the repository that you want to monitor for commits
+4. Set-up a Git post-merge hook
+5. Set-up update-soundrepo.sh that will do the git pull for you
+6. Edit crontab to run the update-soundrepo.sh every 30 seconds.
+
+***********************
+* git-sound-effect.rb *
+***********************
+
+#!/usr/bin/ruby
+sounds = ["~/homer-simpson-mail-call-gather-around.wav",
+	"~/homer-simpson-mail-is-here.wav"]
+chosen = sounds[rand(sounds.size)]
+%x[ play #{chosen} > /dev/null 2>&1 ]
+
+***********************
+* Git post-merge hook *
+***********************
+
+#!/bin/sh
+# echo "POST MERGE"
+
+# Play sound if new stuff comes in
+~/git-sound-effect.rb
+
+***********************
+* update-soundrepo.sh *
+***********************
+
+#!/bin/sh
+export GIT_SSL_NO_VERIFY=true
+cd ~/soundrepo
+git pull > /dev/null 2>&1
+
+***********
+* Crontab *
+***********
+
+# m h  dom mon dow   command
+* * * * * sleep 30; ~/update-soundrepo.sh
+* * * * * ~/update-soundrepo.sh
+
